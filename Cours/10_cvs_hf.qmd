@@ -1,0 +1,207 @@
+---
+title: "10 - Désaisonnalisation des séries haute-fréquence"
+---
+
+```{r setup, include=FALSE}
+options(xtable.comment = FALSE)
+library(ggplot2)
+library(reshape2)
+beamer_textwidth <- 11.13435
+beamer_textheight <- 7.89807
+conv_cm_to_in <- 0.393701
+conv_cm_to_px <- 75
+knitr::opts_chunk$set(echo = FALSE, fig.pos = 'H',message=FALSE,
+                      fig.height = beamer_textheight * conv_cm_to_in,
+                      fig.width =  beamer_textwidth * conv_cm_to_in)
+```
+
+
+
+# Régresseurs externes et TBATS
+
+## Régresseurs externes classiques
+
+Dans certaines méthodes (régression linéaire, ARIMA, etc. mais pas ETS) permettent de rajouter des régresseurs externes qui peuvent aider à l'analyse/prévision
+
+- polynômes sur les dates (e.g. tendance linéaire) (on peut s'aider de `forecast::tslm()`)
+
+. . .
+
+- indicatrices sur la périodicité (avec variable de contraste) :
+
+	- Sur les jours de la semaine
+	
+	- Sur les mois/trimestres
+
+
+
+### Régresseurs de Fourier
+
+Lorsque la périodicité est trop élevée ou lorsqu'il y plusieurs saisonnalités, ajouter des indicatrices peut être trop coûteux.
+
+Solution : ajouter des variables sinusoïdales aux fréquences étudiées !
+
+$$
+\cos\left(\frac{2 k \pi}{m}\right)\quad
+\sin\left(\frac{2 k \pi}{m}\right)
+\quad
+\text{ avec }0<k<m
+$$
+
+Généralement $k\ll m$ lorsque $m$ est grand
+
+. . .
+
+- Pour séries mensuelles : $m=12$
+
+- Pour les séries hebdomadaires $m=365.25/7\simeq 52$
+
+- Pour les séries journalières $m=365.25$ pour saisonnalité annuelle, $m=365.25/12\simeq 30$ pour saisonnalité mensuelle.
+
+### TBATS (1)
+
+Une transformation de Box-Cox est utilisée :
+$$
+y_t^{(\lambda)}=\begin{cases}
+\frac{y_t^\lambda - 1}{\lambda}&\text{if }\lambda\ne0\\
+\log(y_t)&\text{if }\lambda=0
+\end{cases}
+$$
+Ensuite un modèle avec *Trigonometric seasonality, ARMA errors, Trend and Seasonal components* (modèles exponentiels).
+
+Voir `?forecast::tbats()`.
+
+Pour des séries HF, le temps de calcul peut être long.
+
+
+### TBATS (2)
+
+$$
+\begin{cases}
+y_t^{(\lambda)}=l_{t-1}+\phi b_{t-1}+\sum_{i=1}^T s_{t-m_i}^{(i)}+ d_t \text{ and }d_t\sim ARMA(p,q)\\
+l_{t}=l_{t-1}+\phi b_{t-1}+\alpha d_t \\
+b_{t} = \phi b_{t-1} + \beta d_t
+\end{cases}
+$$
+$$
+\begin{cases}
+s_t^{(i)}=\sum_{j=1}^{k_i}s_{j,t}^{(i)} \\
+s_{j,t}^{(i)}=s_{j,t-1}^{(i)}\cos \omega_j+s_{j,t-1}^{*(i)}\sin \omega_j +\gamma_1^{(i)}d_t \\
+s_{j,t-1}^{*(i)} = s_{j,t-1}^{(i)}\sin \omega_j + s_{j,t-1}^{*(i)}\cos \omega_j
++\gamma_2^{(i)}d_t
+\end{cases}
+\text{ and }\omega_j=\frac{2\pi j}{m_i}
+$$
+
+Notation : $TBATS(omega, p,q, phi, <m1,k1>,...,<mJ,kJ>)$ avec
+
+- $omega$ = paramètre de Box-Cox  
+- $(p,q)$ = ARMA(p,q)  
+- $phi$ = paramètre d'amortissement
+- $m1, ..., mJ$ les périodicités et $k1, ..., kJ$ le nombre de termes de fourrier
+
+
+### STR
+
+STR: Seasonal-Trend decomposition using Regression
+
+Régression pénalisée en prenant en compte des saisonnalités multiples.
+
+Voir <https://doi.org/10.1287/ijds.2021.0004> et package [`stR`]( https://CRAN.R-project.org/package=stR).
+
+
+# STL et MSTL
+
+### STL
+
+La méthode *Seasonal-Trend decomposition using LOESS* (STL) est une méthode de décomposition itérative robuste aux points atypiques.
+
+Deux boucles : intérieure (*inner*), pour mettre à jour la tendance et la saisonnalité, inclus dans une boucle extérieure (*outer*) pour calculer des poids associés aux points atypiques
+
+### Boucle intérieure
+
+1. On calcule une série sans tendance $Y-T^{(i-1)}_t$ avec $T^0_t=0.$
+
+2. Pour chaque saisonnalité (mois/trimestre, etc.) Loess appliqué pour estimer $C^{(i)}_t$ (longueur du filtre à spécifier)
+
+3. On estime la tendance de cette composante saisonnière $L^{(i)}_t$ avec différentes moyennes mobiles
+
+4. Estimation d'une composante saisonnière sans tendance : $S^{(i)}_t=C^{(i)}_t-L^{(i)}_t$
+
+5. Estimation de la tendance avec Loess sur série désaisonnalisée $Y- S^{(i)}_t$ (longueur du filtre à spécifier)
+
+### Boucle extérieure
+
+1. Calcul des résidus $R_t$
+
+2. Calcul de poids associés à chaque observation avec 
+$$
+\rho_t=B(|R_t|/h)\text{ et }h=6med(|R_t|)
+$$
+et $B$ un noyau (biweight par défaut)
+
+### MSTL
+
+MSTL est une extension de STL où l'algorithme STL est appliqué à chaque saisonnalités.
+
+Voir <https://doi.org/10.48550/arXiv.2107.13462> et `forecast::mstl()`.
+
+Très proche de Ollech (2018), voir `dsa::dsa()`.
+
+# Extension des moyennes mobiles
+
+### Saisonnalités non-entières
+
+Séries "classiques" la saisonnalité est entière ($s=12,4,...$) mais comment faire pour modéliser les séries journalières ?
+Prendre $s=365$ mais quid des années bissextiles ?
+Utiliser $s=365,25$ mais alors que signifie $1-B^s$ ?
+
+. . .
+
+Solution : prise en compte de saisonnalité non entières par développement de Taylor de $x^\alpha$ autour de 1:
+$$
+x^\alpha\simeq 1+\alpha(x-1)\simeq 1-\alpha+\alpha x
+$$
+Il vient :
+$$
+B^{365,25}=B^{365}B^{0,25}=(1-\alpha)B^{365} + \alpha B^{365+1}
+$$
+
+### Airline fractionnaire
+
+Extension du modèle $ARIMA(0,1,1)(0,1,1)[s]$ avec les notation précédentes et éventuellement plusieurs saisonnalités.
+
+Décomposition faite avec une approche similaire à SEATS `rjd3highfreq::fractionalAirlineDecomposition()` et `rjd3highfreq::multiAirlineDecomposition()`.
+
+Pré-ajustement important : peut être fait avec `rjd3highfreq::fractionalAirlineEstimation()`.
+Autre outlier qui est fréquent :
+$$
+WO_t^{t_0} =\begin{cases}
+1&\text{si }t=t_0\\
+-1&\text{si }t=t_0+1\\
+0&\text{sinon }
+\end{cases}
+$$
+
+Pour des exemples <https://github.com/palatej/test_rjd3hf> (mais code non à jour).
+
+Même idée pour X-11 (`rjd3x11plus::x11plus()`) mais comment choisir les longueurs des filtres ?
+
+
+
+### Bibliographie {.allowframebreaks}
+
+
+
+\begin{thebibliography}{999}
+\bibitem[Eurostat (2015)]{E2015} Eurostat (2015), The ESS guidelines for seasonal adjustment, Eurostat manuals and guidelines, Product Code: KS-GQ-15-001. \url{http://ec.europa.eu/eurostat/web/products-manuals-and-guidelines/-/KS-GQ-15-001}.
+\bibitem[Ladiray et al (2018)]{K2018} Ladiray D., Mazzi G.L, Palate J. et Proietti T. (2018), Seasonal Adjustment of Daily and Weekly Data, in Handbook on Seasonal Adjustment, edited by G. L. Mazzi, co-edited by D. Ladiray, European Union, Luxembourg. \url{ec.europa.eu/eurostat/web/products-manuals-and-guidelines/-/KS-GQ-18-001}.
+\bibitem[Webel et Smyk (2023)]{websmyk}
+Webel et Smyk (2023), Towards seasonal adjustment of infra-monthly time series with JDemetra+. Deutsche Bundesbank Discussion Paper No. 24/2023. \url{https://www.bundesbank.de/resource/blob/915460/e0c29d7a79c28c3b48cdc0b07f1e3a64/mL/2023-09-04-dkp-24-data.pdf}
+\bibitem[Ollech (2018)]{Olleck}
+Ollech D. (2018), Seasonal Adjustment of Daily Time Series. Deutsche Bundesbank Discussion Paper No. 41/2018. \url{http://dx.doi.org/10.2139/ssrn.3273755}
+\bibitem[Dokumentov et Hyndman (2021)]{K2018} Dokumentov A, Hyndman R. (2021) STR: Seasonal-Trend Decomposition Using Regression. INFORMS Journal on Data Science 1(1):50-62. \url{https://doi.org/10.1287/ijds.2021.0004}
+\bibitem[Bandara et Hyndman (2021)]{bandara2021mstl} Bandara K, Hyndman R et Bergmeir C. (2021) MSTL: A Seasonal-Trend Decomposition Algorithm for Time Series with Multiple Seasonal Patterns. \url{https://doi.org/10.48550/arXiv.2107.13462}
+\end{thebibliography}
+
+

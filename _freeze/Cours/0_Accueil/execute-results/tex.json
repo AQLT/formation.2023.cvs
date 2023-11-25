@@ -1,0 +1,16 @@
+{
+  "hash": "b9631fced694ff373b75272884623848",
+  "result": {
+    "markdown": "---\ntitle: \"0 - Accueil des stagiaires\"\n---\n\n\n\n\n### Faire connaissance\nUn tour de table pour faire connaissance :\n\nPrénom, Nom  \nService ou établissement d'origine  \nFonction occupée   \nExpérience sur les CVS-CJO (méthodes, outils utilisés)  \n\nPourquoi suivez-vous cette formation ?\\\nQu'attendez vous de cette formation ?\\\nÀ quelles questions souhaitez-vous obtenir une réponse ?\n\n\n### Objectifs de la formation\n\nEnsemble des documents disponibles sous : https://aqlt.github.io/{{< var repo-github >}}\n\n- connaître les concepts de base et le principe de la méthode X13-ARIMA\n\n- savoir utiliser R et JDemetra+ pour désaisonnaliser des séries\n\n- connaître les méthodes de correction des effets de calendrier\n\n- savoir manipuler les fonctions de base de JDemetra+ et lire les principaux diagnostics\n\n- savoir modifier les spécifications et interpréter les diagnostics détaillés pour améliorer et valider les modèles\n\n- connaître les 3 étapes du processus de la production des CVS-CJO\n\n\n. . .\n\nÀ approfondir : modèles espace-état, désaisonnalisation haute fréquence, benchmarking et désagrégation temporelle\n",
+    "supporting": [
+      "0_Accueil_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": null,
+    "postProcess": false
+  }
+}
