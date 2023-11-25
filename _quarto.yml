@@ -10,7 +10,7 @@ project:
 website:
   title: "{{< var titre.website >}}"
   description: "{{< var description >}}"
-  site-url: "https://aqlt.github.io/formation.2023.cvs"
+  site-url: "https://aqlt.github.io/formation.2023.cvs" # pour sitemap
   favicon: img/favicon.ico
   google-analytics:
     tracking-id: "G-X652XRGDPL"
