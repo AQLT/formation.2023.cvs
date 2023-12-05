@@ -6,11 +6,14 @@ project:
   resources:
     - "*/Cours/*.pdf"
     - "data"
+    - "robots.txt"
 
 website:
   title: "{{< var titre.website >}}"
   description: "{{< var description >}}"
-  site-url: "https://aqlt.github.io/formation.2023.cvs" # pour sitemap
+  # site-url : pour sitemap.xml
+  # Penser à également modifier le fichier robots.txt
+  site-url: "https://aqlt.github.io/formation.2023.cvs"
   favicon: img/favicon.ico
   google-analytics:
     tracking-id: "G-X652XRGDPL"
