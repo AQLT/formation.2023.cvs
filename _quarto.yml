@@ -22,7 +22,7 @@ website:
     logo-alt: "AQLT"
     right:
       - text: "Ensemble formations"
-        href: https://aqlt.github.io/formations/
+        href: https://aqlt.github.io/teaching/
       - icon: github
         href: "http://github.com/AQLT/{{< var repo-github >}}"
     left:
