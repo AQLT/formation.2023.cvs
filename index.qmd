@@ -106,5 +106,5 @@ cat(sprintf("- [%s](PDF/%s)", all_f, all_f),
 	
 # {{< fa copyright >}} Licence
 
-Ces supports de cours sont librement réutilisable sous © 2023 Alain Quartier-la-Tente, Insee, Cepe [CC BY-NC-SA 3.0 <img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Licence Creative Commons" style="display: inline-block; margin: 0"/>](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+Ces supports de cours sont librement réutilisable sous © 2023 Alain Quartier-la-Tente, Cepe [CC BY-NC-SA 3.0 <img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Licence Creative Commons" style="display: inline-block; margin: 0"/>](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
