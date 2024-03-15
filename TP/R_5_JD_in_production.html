@@ -173,9 +173,9 @@ gtag('config', 'G-X652XRGDPL', { 'anonymize_ip': true});
     <h2 id="toc-title">Sur cette page</h2>
    
   <ul>
-  <li><a href="#sec:jwsacruncher" id="toc-sec:jwsacruncher" class="nav-link active" data-scroll-target="#sec\:jwsacruncher"><span class="header-section-number">1</span> JWSACruncher et <code>rjwsacruncher</code></a>
+  <li><a href="#sec-jwsacruncher" id="toc-sec-jwsacruncher" class="nav-link active" data-scroll-target="#sec-jwsacruncher"><span class="header-section-number">1</span> JWSACruncher et <code>rjwsacruncher</code></a>
   <ul class="collapse">
-  <li><a href="#sec:installation" id="toc-sec:installation" class="nav-link" data-scroll-target="#sec\:installation"><span class="header-section-number">1.1</span> Configuration du JWSACruncher</a></li>
+  <li><a href="#sec-installation" id="toc-sec-installation" class="nav-link" data-scroll-target="#sec-installation"><span class="header-section-number">1.1</span> Configuration du JWSACruncher</a></li>
   <li><a href="#utilisation-du-jwsacruncher" id="toc-utilisation-du-jwsacruncher" class="nav-link" data-scroll-target="#utilisation-du-jwsacruncher"><span class="header-section-number">1.2</span> Utilisation du JWSACruncher</a>
   <ul class="collapse">
   <li><a href="#création-du-fichier-de-paramètres-avec-create_param_file" id="toc-création-du-fichier-de-paramètres-avec-create_param_file" class="nav-link" data-scroll-target="#création-du-fichier-de-paramètres-avec-create_param_file"><span class="header-section-number">1.2.1</span> Création du fichier de paramètres avec <code>create_param_file()</code></a></li>
@@ -183,8 +183,8 @@ gtag('config', 'G-X652XRGDPL', { 'anonymize_ip': true});
   </ul></li>
   </ul></li>
   <li><a href="#mise-à-jour-des-données-avec-rjdemetra3" id="toc-mise-à-jour-des-données-avec-rjdemetra3" class="nav-link" data-scroll-target="#mise-à-jour-des-données-avec-rjdemetra3"><span class="header-section-number">2</span> Mise à jour des données avec <code>rjdemetra3</code></a></li>
-  <li><a href="#sec:rjdworkspace" id="toc-sec:rjdworkspace" class="nav-link" data-scroll-target="#sec\:rjdworkspace"><span class="header-section-number">3</span> Mise à jour des metadonnées avec <code>rjdworkspace</code></a></li>
-  <li><a href="#sec:rjd3" id="toc-sec:rjd3" class="nav-link" data-scroll-target="#sec\:rjd3"><span class="header-section-number">4</span> Mise à jour des metadonnées avec <code>rjdemetra3</code></a></li>
+  <li><a href="#sec-rjdworkspace" id="toc-sec-rjdworkspace" class="nav-link" data-scroll-target="#sec-rjdworkspace"><span class="header-section-number">3</span> Mise à jour des metadonnées avec <code>rjdworkspace</code></a></li>
+  <li><a href="#sec-rjd3" id="toc-sec-rjd3" class="nav-link" data-scroll-target="#sec-rjd3"><span class="header-section-number">4</span> Mise à jour des metadonnées avec <code>rjdemetra3</code></a></li>
   <li><a href="#améliorer-le-suivi-de-la-production" id="toc-améliorer-le-suivi-de-la-production" class="nav-link" data-scroll-target="#améliorer-le-suivi-de-la-production"><span class="header-section-number">5</span> Améliorer le suivi de la production</a>
   <ul class="collapse">
   <li><a href="#ggdemetra" id="toc-ggdemetra" class="nav-link" data-scroll-target="#ggdemetra"><span class="header-section-number">5.1</span> ggdemetra</a></li>
@@ -253,10 +253,10 @@ gtag('config', 'G-X652XRGDPL', { 'anonymize_ip': true});
 <p>Lors de la mise en production, le plus simple est de manipuler des workspaces et de mettre à jour les modèles, lors de l’arrivée de nouvelles données à travers le <a href="https://github.com/jdemetra/jwsacruncher">JWSACruncher</a>. Pour faciliter son utilisation depuis R, le package <code>rjwsacruncher</code> peut être utilisé.</p>
 <p>Lorsque les workspaces sont créés depuis R, on perd toutes les métadonnées (lien vers les fichiers, commentaires, etc.), une solution pour cela : utiliser <a href="https://github.com/InseeFrLab/rjdworkspace"><code>rjdworkspace</code></a> (package non publié sur le CRAN) pour récupérer ces données depuis un autre workspace. Pour la version 3, <code>rjdemetra3</code> contient toutes les fonctionnalités de <code>rjdworkspace</code>.</p>
 <p>Dans ce TP on utilisera les données du package <code>RJDemetra</code> mais n’hésitez pas à utiliser vos propres séries.</p>
-<section id="sec:jwsacruncher" class="level1" data-number="1">
+<section id="sec-jwsacruncher" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> JWSACruncher et <code>rjwsacruncher</code></h1>
-<section id="sec:installation" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="sec:installation"><span class="header-section-number">1.1</span> Configuration du JWSACruncher</h2>
+<section id="sec-installation" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-installation"><span class="header-section-number">1.1</span> Configuration du JWSACruncher</h2>
 <p>Le JWSACruncher est téléchargeable ici : <a href="https://github.com/jdemetra/jwsacruncher/releases" class="uri">https://github.com/jdemetra/jwsacruncher/releases</a>.</p>
 <p>Pour utiliser les dernières versions il faut avoir une version de Java supérieure à la 8, si ce n’est pas le cas, il faut télécharger une version portable de Java et configurer le JWSACruncher en conséquence (voir <a href="../manuel_installation.html">manuel d’installation</a>). Cette opération n’est pas utile si l’on utilise une version 3.x.y de JDemetra+ (une version portable de Java est “embarquée” avec le JWSACruncher). Ces manipulations peuvent aussi se faire à partir de <code>rjwsacruncher</code> :</p>
 <div class="cell">
@@ -493,7 +493,7 @@ Solution
 </section>
 <section id="lancement-du-jwsacruncher" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="lancement-du-jwsacruncher"><span class="header-section-number">1.2.2</span> Lancement du JWSACruncher</h3>
-<p>Pour lancer le JWSACruncher avec <code>cruncher()</code> ou <code>cruncher_and_param()</code>, il faut spécifier le chemin d’accès au dossier contenant le JWSACruncher (paramètre <code>cruncher_bin_directory</code>) ainsi que celui du workspace à traiter (paramètre <code>workspace</code>). Si cela a déjà été fait dans la section <span class="citation" data-cites="sec:installation">[-@sec:installation]</span>, ne pas prendre en compte le paragraphe suivant</p>
+<p>Pour lancer le JWSACruncher avec <code>cruncher()</code> ou <code>cruncher_and_param()</code>, il faut spécifier le chemin d’accès au dossier contenant le JWSACruncher (paramètre <code>cruncher_bin_directory</code>) ainsi que celui du workspace à traiter (paramètre <code>workspace</code>). Si cela a déjà été fait dans la <a href="#sec-installation" class="quarto-xref">section&nbsp;1.1</a>, ne pas prendre en compte le paragraphe suivant</p>
 <p>Par défaut, le chemin d’accès au dossier du JWSACruncher est celui contenu dans le paramètre <code>cruncher_bin_directory</code> : il suffit donc de modifier une seule fois cette option afin qu’elle s’applique à toutes les exécutions du JWSACruncher. Le chemin à indiquer est celui du dossier contenant le fichier <em>jwsacruncher.bat</em>, situé dans le dossier “Bin” du dossier d’installation du JWSACruncher. Ainsi, s’il a été installé sous <code>D:\jdemetra-cli-2.2.4</code>, le fichier <em>jwsacruncher.bat</em> sera présent sous <code>D:\jdemetra-cli-2.2.4\bin</code>. Il faut donc modifier l’option <code>cruncher_bin_directory</code> de la façon suivante :</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">cruncher_bin_directory =</span> <span class="st">"D:/jdemetra-cli-2.2.4/bin/"</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -659,7 +659,7 @@ BIC:  1666.622 </code></pre>
 </div>
 </div>
 </section>
-<section id="sec:rjdworkspace" class="level1" data-number="3">
+<section id="sec-rjdworkspace" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Mise à jour des metadonnées avec <code>rjdworkspace</code></h1>
 <p>Lorsque l’on manipule des objets depuis RJDemetra, plusieurs informations sont perdues par rapport à JDemetra+, dont :</p>
 <ul>
@@ -766,7 +766,7 @@ Solution
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">save_workspace</span>(jws3, <span class="fu">file.path</span>(dir_dl, <span class="st">"ws_prod_tmp2.xml"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="sec:rjd3" class="level1" data-number="4">
+<section id="sec-rjd3" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Mise à jour des metadonnées avec <code>rjdemetra3</code></h1>
 <p>Dans <code>rjdemetra3</code> il existe différentes fonctions pour modifier les métadonnées des SAItems : <code>rjdemetra3::set_comment()</code>, <code>rjdemetra3::set_context()</code>, <code>rjdemetra3::set_domain_specification()</code>, <code>rjdemetra3::set_name()</code>, <code>rjdemetra3::set_priority()</code>, <code>rjdemetra3::set_raw_data()</code>, <code>rjdemetra3::set_specification()</code>, <code>rjdemetra3::set_ts_metadata()</code>, <code>rjdemetra3::put_ts_metadata()</code>, <code>rjdemetra3::set_ts()</code>. Le package <code>rjd3providers</code> permet également, grâce à <code>rjdemetra3</code>, de mettre à jour les providers depuis R (i.e.&nbsp;: les chemins vers les données).</p>
 <p>Les informations sur les metadata associés à la série temporelle peut être lue en utilisant la fonction <code>get_ts()</code> :</p>
@@ -785,7 +785,7 @@ $source
 [1] ""
 
 $id
-[1] "317c857b-226f-4309-81e5-8a85c79ba414"
+[1] "d484d031-64cc-45b3-aff8-66b280963958"
 
 attr(,"class")
 [1] "JD3_TSMONIKER"
@@ -810,7 +810,7 @@ $source
 [1] ""
 
 $id
-[1] "e2b68271-dac4-4539-bad9-359635d42c17"
+[1] "35e3351b-9232-48a7-a8a8-fdaee23224f9"
 
 attr(,"class")
 [1] "JD3_TSMONIKER"
@@ -869,7 +869,7 @@ $source
 [1] ""
 
 $id
-[1] "317c857b-226f-4309-81e5-8a85c79ba414"
+[1] "d484d031-64cc-45b3-aff8-66b280963958"
 
 attr(,"class")
 [1] "JD3_TSMONIKER"
