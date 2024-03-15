@@ -258,7 +258,7 @@ Les fichiers de paramètres par défaut peuvent être obtenus avec la fonction `
 ### Lancement du JWSACruncher
 
 Pour lancer le JWSACruncher avec `cruncher()` ou `cruncher_and_param()`, il faut spécifier le chemin d'accès au dossier contenant le JWSACruncher (paramètre `cruncher_bin_directory`) ainsi que celui du workspace à traiter (paramètre `workspace`).
-Si cela a déjà été fait dans la section [-sec:installation@], ne pas prendre en compte le paragraphe suivant
+Si cela a déjà été fait dans la section [-@sec:installation], ne pas prendre en compte le paragraphe suivant
 
 Par défaut, le chemin d'accès au dossier du JWSACruncher est celui contenu dans le paramètre `cruncher_bin_directory` : il suffit donc de modifier une seule fois cette option afin qu'elle s'applique à toutes les exécutions du JWSACruncher. 
 Le chemin à indiquer est celui du dossier contenant le fichier *jwsacruncher.bat*, situé dans le dossier "Bin" du dossier d'installation du JWSACruncher. 
