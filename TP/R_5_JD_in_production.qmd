@@ -58,9 +58,9 @@ Pour la version 3, `rjdemetra3` contient toutes les fonctionnalités de `rjdwork
 
 Dans ce TP on utilisera les données du package `RJDemetra` mais n'hésitez pas à utiliser vos propres séries.
 
-# JWSACruncher et `rjwsacruncher` {#sec:jwsacruncher}
+# JWSACruncher et `rjwsacruncher` {#sec-jwsacruncher}
 
-## Configuration du JWSACruncher {#sec:installation}
+## Configuration du JWSACruncher {#sec-installation}
 
 Le JWSACruncher est téléchargeable ici : <https://github.com/jdemetra/jwsacruncher/releases>.
 
@@ -258,7 +258,7 @@ Les fichiers de paramètres par défaut peuvent être obtenus avec la fonction `
 ### Lancement du JWSACruncher
 
 Pour lancer le JWSACruncher avec `cruncher()` ou `cruncher_and_param()`, il faut spécifier le chemin d'accès au dossier contenant le JWSACruncher (paramètre `cruncher_bin_directory`) ainsi que celui du workspace à traiter (paramètre `workspace`).
-Si cela a déjà été fait dans la section [-@sec:installation], ne pas prendre en compte le paragraphe suivant
+Si cela a déjà été fait dans la @sec-installation, ne pas prendre en compte le paragraphe suivant
 
 Par défaut, le chemin d'accès au dossier du JWSACruncher est celui contenu dans le paramètre `cruncher_bin_directory` : il suffit donc de modifier une seule fois cette option afin qu'elle s'applique à toutes les exécutions du JWSACruncher. 
 Le chemin à indiquer est celui du dossier contenant le fichier *jwsacruncher.bat*, situé dans le dossier "Bin" du dossier d'installation du JWSACruncher. 
@@ -349,7 +349,7 @@ rjd3x13::x13(y)$result$preprocessing
 ```
 
 
-# Mise à jour des metadonnées avec `rjdworkspace` {#sec:rjdworkspace}
+# Mise à jour des metadonnées avec `rjdworkspace` {#sec-rjdworkspace}
 
 Lorsque l'on manipule des objets depuis RJDemetra, plusieurs informations sont perdues par rapport à JDemetra+, dont :
 
@@ -460,7 +460,7 @@ save_workspace(jws3, file.path(dir_dl, "ws_prod_tmp2.xml"))
 ```
 
 
-# Mise à jour des metadonnées avec `rjdemetra3` {#sec:rjd3}
+# Mise à jour des metadonnées avec `rjdemetra3` {#sec-rjd3}
 
 Dans `rjdemetra3` il existe différentes fonctions pour modifier les métadonnées des SAItems : `rjdemetra3::set_comment()`, `rjdemetra3::set_context()`, `rjdemetra3::set_domain_specification()`, `rjdemetra3::set_name()`, `rjdemetra3::set_priority()`, `rjdemetra3::set_raw_data()`, `rjdemetra3::set_specification()`, `rjdemetra3::set_ts_metadata()`, `rjdemetra3::put_ts_metadata()`, `rjdemetra3::set_ts()`.
 Le package `rjd3providers` permet également, grâce à `rjdemetra3`, de mettre à jour les providers depuis R (i.e. : les chemins vers les données).
